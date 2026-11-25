@@ -100,3 +100,26 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: #dcecef; col
 .pastille.repondre { background: #ffe1b8; } .pastille.attente { background: #dcebf7; }
 .p-nouveaux { display: inline-block; margin-top: 4px; font-size: 12px; padding: 2px 9px; border-radius: 99px; background: var(--douce); }
 .p-bloc a { color: var(--turquoise); font-weight: 600; text-decoration: none; margin-right: 8px; }
+
+/* Agenda (maison) */
+.ag-jour { margin-top: 8px; font-weight: 600; font-size: 13px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--bord); padding-bottom: 3px; }
+.ag-cycle { font-size: 11px; font-weight: 600; padding: 1px 8px; border-radius: 99px; background: #e3f4f1; color: #137a6f; }
+.ag-ev { display: grid; grid-template-columns: 62px 1fr; gap: 6px; font-size: 13px; }
+.ag-ev small { color: var(--discret); }
+.ag-cours { margin: 0; font-size: 12px; color: var(--discret); }
+
+/* Boutons du panneau */
+.p-taches .case.cliquable { background: #fff; cursor: pointer; padding: 0; }
+.p-taches .case.cliquable:hover { border-color: var(--turquoise); background: #e3f4f1; }
+.p-ligne { display: flex; gap: 8px; margin-top: 8px; }
+.bouton.principal-petit { background: var(--turquoise); border-color: var(--turquoise); color: #fff; font-weight: 600; }
+.p-choix { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
+.p-choix[hidden] { display: none; }
+.p-choix input[type=text] { flex: 1; min-width: 160px; }
+.p-choix input { border: 1px solid #d9cfbd; border-radius: 9px; padding: 6px 8px; font: inherit; font-size: 14px; }
+.p-erreur { margin: 8px 0 0; padding: 8px 10px; border-radius: 9px; background: #ffe8e5; color: #8a2a20; font-size: 13px; }
+.p-erreur[hidden] { display: none; }
+#message { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 9; display: flex; gap: 14px; align-items: center;
+  padding: 10px 16px; border-radius: 12px; background: #23302fee; color: #fff; font-size: 14px; box-shadow: 0 4px 16px #0003; max-width: calc(100vw - 32px); }
+#message[hidden] { display: none; }
+#message .lien { color: #7fe3d6; }
