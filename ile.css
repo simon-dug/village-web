@@ -37,11 +37,11 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: #dcecef; col
 .carte-connexion h1 { margin: 0 0 8px; font-size: 24px; }
 .garder { display: inline-flex; align-items: center; gap: 8px; margin: 4px 0; font-size: 14px; cursor: pointer; }
 .garder input { width: 18px; height: 18px; accent-color: var(--turquoise); }
-#liste-captures { position: fixed; top: 60px; right: 16px; width: 300px; max-height: 60vh; overflow-y: auto; z-index: 6; background: var(--fond-panneau);
+.liste-bandeau { position: fixed; top: 60px; right: 16px; width: 340px; max-height: 60vh; overflow-y: auto; z-index: 6; background: var(--fond-panneau);
   border-radius: 12px; padding: 12px 14px; box-shadow: 0 4px 16px #0002; display: flex; flex-direction: column; gap: 6px; }
-#liste-captures[hidden] { display: none; }
-#liste-captures h3 { margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--discret); }
-#liste-captures a { color: var(--texte); text-decoration: none; }
+.liste-bandeau[hidden] { display: none; }
+.liste-bandeau h3 { margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--discret); }
+.liste-bandeau a { color: var(--texte); text-decoration: none; }
 
 /* Capture rapide */
 #btn-capturer { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 5; border-radius: 99px; padding: 12px 22px; box-shadow: 0 4px 14px #0003; font-size: 16px; }
@@ -92,3 +92,11 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: #dcecef; col
   #bandeau { left: 16px; right: 16px; flex-wrap: wrap; gap: 6px 12px; }
   #legende { display: none; }
 }
+
+/* Courriels (Gmail, métadonnées) */
+.liste-bandeau a.courriel { display: grid; grid-template-columns: 1fr auto; gap: 0 8px; padding: 6px 0; border-bottom: 1px solid var(--bord); font-size: 13px; }
+.liste-bandeau a.courriel span { grid-column: 1 / -1; color: var(--discret); }
+.liste-bandeau a.courriel small { color: var(--discret); }
+.pastille.repondre { background: #ffe1b8; } .pastille.attente { background: #dcebf7; }
+.p-nouveaux { display: inline-block; margin-top: 4px; font-size: 12px; padding: 2px 9px; border-radius: 99px; background: var(--douce); }
+.p-bloc a { color: var(--turquoise); font-weight: 600; text-decoration: none; margin-right: 8px; }
