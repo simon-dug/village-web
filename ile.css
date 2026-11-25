@@ -23,6 +23,7 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: #dcecef; col
 .l { width: 10px; height: 10px; border-radius: 50%; display: inline-block; border: 1px solid #0002; }
 .l.eteinte { background: #8a8f8c; } .l.douce { background: var(--douce); box-shadow: 0 0 6px var(--douce); }
 .l.ambre { background: var(--ambre); box-shadow: 0 0 6px var(--ambre); } .l.rouge { background: var(--rouge); box-shadow: 0 0 6px var(--rouge); }
+.fanion { width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 11px solid var(--turquoise); display: inline-block; }
 .q { display: inline-grid; place-items: center; width: 15px; height: 15px; border: 1.5px solid var(--bois); border-radius: 4px; background: #fffaf2; color: #5b4a3a; font-size: 11px; }
 
 #chargement { position: fixed; inset: 0; display: grid; place-items: center; color: var(--discret); font-size: 16px; }
@@ -71,6 +72,16 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: #dcecef; col
 .p-discret { color: var(--discret); font-size: 13px; }
 .p-sans-plan { font-weight: 600; }
 .p-remarque { color: #7a5a1d; font-size: 13px; }
+.p-barre { height: 8px; border-radius: 99px; background: #efe7d8; overflow: hidden; margin: 4px 0 8px; }
+.p-barre > div { height: 100%; background: var(--turquoise); border-radius: 99px; }
+.p-taches { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; font-size: 14px; }
+.p-taches li { display: flex; gap: 8px; align-items: flex-start; }
+.p-taches .case { flex: none; width: 15px; height: 15px; margin-top: 2px; border: 1.5px solid #c9bda8; border-radius: 4px; display: grid; place-items: center; font-size: 11px; color: #fff; }
+.p-taches li.faite { color: var(--discret); }
+.p-taches li.faite span:nth-child(2) { text-decoration: line-through; }
+.p-taches li.faite .case { background: var(--turquoise); border-color: var(--turquoise); }
+.p-etiquette { flex: none; font-size: 11px; padding: 0 7px; border-radius: 99px; background: var(--douce); align-self: center; }
+.p-victoire { color: #137a6f; }
 .p-actions { display: flex; gap: 8px; flex-wrap: wrap; border-top: 1px solid var(--bord); margin-top: 16px; padding-top: 14px; }
 .bouton { border: 1px solid #d9cfbd; background: #fff; color: var(--texte); border-radius: 9px; padding: 7px 12px; font: inherit; font-size: 14px; cursor: pointer; text-decoration: none; }
 .bouton.ia { border-color: #b8a8ec; }
