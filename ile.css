@@ -34,9 +34,6 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: #dcecef; col
 #fiche-pnj .f-avis { max-height: 42vh; overflow: auto; white-space: pre-wrap; margin-top: 6px; padding: 8px 10px; border-radius: 8px; background: #f6f1e7; font-size: 12.5px; }
 #fiche-pnj .f-travail { color: #6b4a00; }
 
-#legende { position: fixed; right: 16px; bottom: 12px; display: flex; gap: 12px; flex-wrap: wrap; font-size: 12px; color: var(--discret);
-  background: #fffdf8cc; padding: 5px 10px; border-radius: 10px; }
-#legende span { display: inline-flex; align-items: center; gap: 5px; }
 .l { width: 10px; height: 10px; border-radius: 50%; display: inline-block; border: 1px solid #0002; }
 .l.eteinte { background: #8a8f8c; } .l.douce { background: var(--douce); box-shadow: 0 0 6px var(--douce); }
 .l.ambre { background: var(--ambre); box-shadow: 0 0 6px var(--ambre); } .l.rouge { background: var(--rouge); box-shadow: 0 0 6px var(--rouge); }
@@ -45,8 +42,14 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: #dcecef; col
 
 #chargement { position: fixed; inset: 0; display: grid; place-items: center; color: var(--discret); font-size: 16px; }
 
-/* Version à distance */
-#maj { color: var(--discret); font-size: 13px; }
+/* Version à distance : bouton carré « porte » (déconnexion), en haut à droite, même style que le bouton de lumière. */
+.bouton-porte { position: fixed; top: 12px; right: 16px; z-index: 2; width: 38px; height: 38px; padding: 7px; border-radius: 9px; cursor: pointer;
+  border: 1px solid #d9cfbd; background: #fffdf8e6; box-shadow: 0 2px 8px #0000001a; color: #8a5a36; }
+.bouton-porte[hidden] { display: none; }
+.bouton-porte svg { width: 100%; height: 100%; display: block; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.bouton-porte svg circle { fill: currentColor; stroke: none; }
+.bouton-porte:hover { background: #fff; }
+body.ciel-nuit .bouton-porte { background: #1a2030d9; border-color: #39425a; color: #e0b46a; box-shadow: none; }
 .lien { border: 0; background: none; padding: 0; color: var(--turquoise); font: inherit; font-weight: 600; cursor: pointer; }
 #connexion { position: fixed; inset: 0; display: grid; place-items: center; background: #dcecef; z-index: 10; padding: 16px; }
 #connexion[hidden] { display: none; }
@@ -107,7 +110,6 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: #dcecef; col
 @media (max-width: 720px) {
   #panneau { top: auto; width: 100vw; height: 60vh; border-radius: 14px 14px 0 0; box-shadow: 0 -2px 16px #00000024; }
   #bandeau { left: 16px; right: 16px; flex-wrap: wrap; gap: 6px 12px; }
-  #legende { display: none; }
 }
 
 /* Courriels (Gmail, métadonnées) */
