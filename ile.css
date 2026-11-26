@@ -5,10 +5,19 @@
 html, body { margin: 0; height: 100%; overflow: hidden; background: #dcecef; color: var(--texte); font: 15px/1.45 system-ui, sans-serif; }
 #scene canvas { display: block; }
 
-#bandeau { position: fixed; top: 12px; right: 16px; display: flex; gap: 14px; align-items: center; padding: 8px 14px;
-  background: #fffdf8e6; border-radius: 12px; box-shadow: 0 2px 8px #0000001a; font-size: 14px; }
-#bandeau a { color: var(--turquoise); text-decoration: none; font-weight: 600; }
-#resume { color: var(--discret); }
+/* Barre de boutons carrés en haut à droite (2026-11-26, remplace le bandeau) : même style que les boutons lumière et porte. */
+#barre { position: fixed; top: 12px; right: 16px; z-index: 2; display: flex; gap: 8px; }
+.bouton-carre { position: relative; box-sizing: border-box; width: 38px; height: 38px; padding: 7px; border-radius: 9px; cursor: pointer;
+  border: 1px solid #d9cfbd; background: #fffdf8e6; box-shadow: 0 2px 8px #0000001a; color: #8a5a36; display: block; }
+.bouton-carre[hidden] { display: none; }
+.bouton-carre:hover { background: #fff; }
+.bouton-carre svg { width: 100%; height: 100%; display: block; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.bouton-carre svg circle { stroke: currentColor; }
+#liste svg circle { fill: currentColor; stroke: none; }
+/* Pastille : nombre à traiter, dans le coin du bouton. */
+.bouton-carre .compte { position: absolute; top: -7px; right: -7px; min-width: 19px; height: 19px; box-sizing: border-box; padding: 0 5px; border-radius: 99px;
+  background: var(--turquoise); color: #fff; font: 700 11.5px/19px system-ui, sans-serif; text-align: center; border: 1.5px solid #fffdf8; }
+.bouton-carre .compte:empty { display: none; }
 
 #etiquettes { position: fixed; inset: 0; pointer-events: none; }
 .quartier { position: absolute; left: 0; top: 0; padding: 3px 10px; border-radius: 99px; background: #fffdf8d9; color: #5b4a3a;
@@ -42,14 +51,8 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: #dcecef; col
 
 #chargement { position: fixed; inset: 0; display: grid; place-items: center; color: var(--discret); font-size: 16px; }
 
-/* Version à distance : bouton carré « porte » (déconnexion), en haut à droite, même style que le bouton de lumière. */
-.bouton-porte { position: fixed; top: 12px; right: 16px; z-index: 2; width: 38px; height: 38px; padding: 7px; border-radius: 9px; cursor: pointer;
-  border: 1px solid #d9cfbd; background: #fffdf8e6; box-shadow: 0 2px 8px #0000001a; color: #8a5a36; }
-.bouton-porte[hidden] { display: none; }
-.bouton-porte svg { width: 100%; height: 100%; display: block; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+/* Porte (distance) : un bouton carré de la barre ; son rond de poignée est plein. */
 .bouton-porte svg circle { fill: currentColor; stroke: none; }
-.bouton-porte:hover { background: #fff; }
-body.ciel-nuit .bouton-porte { background: #1a2030d9; border-color: #39425a; color: #e0b46a; box-shadow: none; }
 .lien { border: 0; background: none; padding: 0; color: var(--turquoise); font: inherit; font-weight: 600; cursor: pointer; }
 #connexion { position: fixed; inset: 0; display: grid; place-items: center; background: #dcecef; z-index: 10; padding: 16px; }
 #connexion[hidden] { display: none; }
@@ -64,8 +67,8 @@ body.ciel-nuit .bouton-porte { background: #1a2030d9; border-color: #39425a; col
 .liste-bandeau a { color: var(--texte); text-decoration: none; }
 
 /* Capture rapide */
-#btn-capturer { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 5; border-radius: 99px; padding: 12px 22px; box-shadow: 0 4px 14px #0003; font-size: 16px; }
-#btn-capturer[hidden], #capture[hidden] { display: none; }
+/* Bouton « + » de capture : un bouton carré de la barre (2026-11-26). */
+#capture[hidden] { display: none; }
 #capture { position: fixed; left: 50%; bottom: 0; transform: translateX(-50%); width: min(520px, 100vw); box-sizing: border-box; z-index: 8;
   background: var(--fond-panneau); border-radius: 16px 16px 0 0; padding: 14px 16px 18px; box-shadow: 0 -4px 20px #00000030; display: flex; flex-direction: column; gap: 10px; }
 .capture-tete { display: flex; justify-content: space-between; align-items: center; font-size: 17px; }
@@ -134,7 +137,7 @@ body.ciel-nuit .bouton-porte { background: #1a2030d9; border-color: #39425a; col
 
 @media (max-width: 720px) {
   #panneau { top: auto; width: 100vw; height: 60vh; border-radius: 14px 14px 0 0; box-shadow: 0 -2px 16px #00000024; }
-  #bandeau { left: 16px; right: 16px; flex-wrap: wrap; gap: 6px 12px; }
+
 }
 
 /* Courriels (Gmail, métadonnées) */
@@ -184,15 +187,20 @@ body.ciel-nuit .bouton-porte { background: #1a2030d9; border-color: #39425a; col
 #bouton-lumiere svg circle { fill: currentColor; }
 #bouton-lumiere:hover { background: #fff; }
 /* Panneau de dossier ouvert (à gauche) : l'horloge et le bouton se tassent à droite du panneau. */
-#panneau:not([hidden]) ~ #horloge { left: 408px; top: 76px; }
+#panneau:not([hidden]) ~ #horloge { left: 408px; }
 #panneau:not([hidden]) ~ #horloge .h-heure { font-size: clamp(56px, 6.5vw, 104px); }
 #panneau:not([hidden]) ~ #bouton-lumiere { left: 396px; }
 /* La nuit (mode Auto) : la date et l'interface se font discrètes pour ne pas éblouir. */
 body.ciel-nuit { background: #070b18; }
 body.ciel-nuit #horloge .h-date { color: #c9b9a6; }
-body.ciel-nuit #bandeau, body.ciel-nuit #legende, body.ciel-nuit #horloge .h-prochain, body.ciel-nuit .quartier { background: #1a2030d9; color: #c7cfdc; box-shadow: none; }
-body.ciel-nuit #resume { color: #9aa6b8; }
+body.ciel-nuit #legende, body.ciel-nuit #horloge .h-prochain, body.ciel-nuit .quartier { background: #1a2030d9; color: #c7cfdc; box-shadow: none; }
+body.ciel-nuit .bouton-carre { background: #1a2030d9; border-color: #39425a; color: #e0b46a; box-shadow: none; }
+body.ciel-nuit .bouton-carre .compte { border-color: #1a2030; }
 body.ciel-nuit #bouton-lumiere { background: #1a2030d9; border-color: #39425a; color: #e0b46a; box-shadow: none; }
-/* Fenêtre étroite : le bandeau occupe toute la largeur, l'horloge passe dessous. */
-@media (max-width: 1250px) { #horloge { top: 76px; } }
+
+
 @media (max-width: 720px) { #horloge { display: none; } #panneau:not([hidden]) ~ #bouton-lumiere { display: none; } }
+/* Tournée : courriels « rien à faire » regroupés en bas, avec « Tout est vu » (vague 4, A2) */
+.t-groupe { margin-top: 18px; padding-top: 10px; border-top: 2px dashed var(--bord); }
+.t-groupe-titre { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--discret); }
+.t-groupe .t-carte { opacity: .85; }
