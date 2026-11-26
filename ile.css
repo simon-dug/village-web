@@ -17,6 +17,23 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: #dcecef; col
 #bulle { position: fixed; left: 0; top: 0; max-width: 320px; padding: 6px 10px; border-radius: 8px; background: #23302fe6; color: #fff;
   font-size: 13px; pointer-events: none; }
 
+/* Fiche d'un personnage (agent) : nom, mission, état, modèle d'IA ; aucun bouton */
+#fiche-pnj { position: fixed; z-index: 7; width: 260px; max-width: calc(100vw - 32px); box-sizing: border-box; padding: 10px 14px;
+  background: var(--fond-panneau); border-radius: 12px; box-shadow: 0 4px 16px #0003; font-size: 13px; }
+#fiche-pnj[hidden] { display: none; }
+#fiche-pnj .f-nom { font-size: 16px; }
+#fiche-pnj p { margin: 4px 0 0; }
+#fiche-pnj .f-detail { color: var(--discret); font-size: 12px; }
+/* Missions (vague 3.4a) : bouton avec IA, confirmation, avis à lire */
+#fiche-pnj.large { width: 380px; }
+#fiche-pnj .f-zone { border-top: 1px solid var(--bord); margin-top: 10px; padding-top: 8px; }
+#fiche-pnj .f-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+#fiche-pnj .bouton { font-size: 13px; padding: 6px 10px; }
+#fiche-pnj .f-verdict { font-weight: 600; margin-top: 2px; }
+#fiche-pnj .f-verdict.alerte { color: #8a2a20; }
+#fiche-pnj .f-avis { max-height: 42vh; overflow: auto; white-space: pre-wrap; margin-top: 6px; padding: 8px 10px; border-radius: 8px; background: #f6f1e7; font-size: 12.5px; }
+#fiche-pnj .f-travail { color: #6b4a00; }
+
 #legende { position: fixed; right: 16px; bottom: 12px; display: flex; gap: 12px; flex-wrap: wrap; font-size: 12px; color: var(--discret);
   background: #fffdf8cc; padding: 5px 10px; border-radius: 10px; }
 #legende span { display: inline-flex; align-items: center; gap: 5px; }
@@ -123,3 +140,26 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: #dcecef; col
   padding: 10px 16px; border-radius: 12px; background: #23302fee; color: #fff; font-size: 14px; box-shadow: 0 4px 16px #0003; max-width: calc(100vw - 32px); }
 #message[hidden] { display: none; }
 #message .lien { color: #7fe3d6; }
+
+/* Horloge « écran de bureau » (2026-11-26) : Lilita One (SIL OFL, bureau/polices) avec contour bois, style Kenney */
+@font-face { font-family: 'Lilita One'; src: url('polices/LilitaOne-Regular.ttf') format('truetype'); font-display: swap; }
+#horloge { position: fixed; top: 14px; left: 28px; z-index: 1; pointer-events: none; font-family: 'Lilita One', system-ui, sans-serif; line-height: 1; }
+#horloge .h-heure { font-size: clamp(64px, 9vw, 132px); color: #fffaf2; -webkit-text-stroke: 4px #8a5a36; paint-order: stroke fill; letter-spacing: .02em; }
+#horloge .h-date { font-size: clamp(18px, 1.8vw, 26px); color: #5b3a22; margin: 6px 0 0 4px; }
+#horloge .h-date::first-letter { text-transform: uppercase; }
+#horloge .h-prochain { display: inline-block; margin: 12px 0 0 2px; padding: 7px 14px; border-radius: 10px; background: #fffdf8e6; box-shadow: 0 2px 8px #0000001a;
+  font: 600 17px/1.3 system-ui, sans-serif; color: var(--texte); }
+#horloge .h-prochain b { color: #b8741a; }
+#horloge .h-prochain[hidden] { display: none; }
+#horloge .h-mode { display: block; pointer-events: auto; margin: 10px 0 0 2px; border: 1px solid #d9cfbd; background: #fffdf8cc; color: var(--discret);
+  border-radius: 99px; padding: 3px 11px; font: 12px system-ui, sans-serif; cursor: pointer; }
+#horloge .h-mode:hover { color: var(--texte); background: #fff; }
+/* La nuit (mode Auto) : la date et l'interface se font discrètes pour ne pas éblouir. */
+body.ciel-nuit { background: #070b18; }
+body.ciel-nuit #horloge .h-date { color: #c9b9a6; }
+body.ciel-nuit #bandeau, body.ciel-nuit #legende, body.ciel-nuit #horloge .h-prochain, body.ciel-nuit .quartier { background: #1a2030d9; color: #c7cfdc; box-shadow: none; }
+body.ciel-nuit #resume { color: #9aa6b8; }
+body.ciel-nuit #horloge .h-mode { background: #1a2030cc; border-color: #39425a; color: #9aa6b8; }
+/* Fenêtre étroite : le bandeau occupe toute la largeur, l'horloge passe dessous. */
+@media (max-width: 1250px) { #horloge { top: 76px; } }
+@media (max-width: 720px) { #horloge { display: none; } }
