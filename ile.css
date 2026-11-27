@@ -100,6 +100,14 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: #dcecef; col
 .t-consigne { display: block; width: 100%; box-sizing: border-box; margin-top: 8px; padding: 8px 10px; border: 1px solid #d9cfbd; border-radius: 9px; font: inherit; font-size: 14px; }
 .t-decision { margin: 8px 0 0; font-weight: 600; font-size: 14px; }
 .t-historique { margin-top: 16px; }
+.t-combinee { margin: 0 0 6px; font-size: 12.5px; color: var(--discret); }
+.t-avant { margin: 6px 0 0; font-size: 12.5px; color: var(--discret); font-style: italic; }
+.t-attente { margin: 10px 0 0; padding: 8px 10px; border-radius: 8px; background: #f6f1e7; color: var(--discret); font-size: 13.5px; }
+/* « Faire la tournée » : collé en bas du panneau même quand on fait défiler les cartes (2026-11-27). */
+.t-barre { position: sticky; bottom: -18px; margin: 16px -20px -18px; padding: 12px 20px 16px; background: var(--fond-panneau);
+  border-top: 1px solid var(--bord); box-shadow: 0 -6px 14px #0000000f; z-index: 1; }
+.t-barre > .bouton { width: 100%; }
+.t-barre-texte { margin: 0 0 4px; font-size: 14px; }
 .t-historique summary { cursor: pointer; color: var(--discret); font-size: 13px; }
 @media (max-width: 720px) { #tournee { top: auto; width: 100vw; height: 70vh; border-radius: 14px 14px 0 0; } }
 
@@ -110,6 +118,18 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: #dcecef; col
 .p-segment { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--discret); }
 .p-titre { margin: 2px 0 0; font-size: 20px; line-height: 1.25; }
 .p-fermer { border: 0; background: #f1ebe0; border-radius: 8px; width: 32px; height: 32px; font-size: 20px; cursor: pointer; color: var(--texte); flex: none; }
+/* Bouton Fermer des panneaux latéraux (2026-11-27, Simon) : à l'extérieur, contre le bord droit du panneau,
+   toujours visible même quand on fait défiler (position fixe par rapport à la fenêtre). */
+#panneau .p-fermer, #tournee .p-fermer { position: fixed; top: 14px; z-index: 5; width: 38px; height: 38px; font-size: 22px;
+  border: 1px solid var(--bord); background: var(--fond-panneau); box-shadow: 2px 2px 10px #00000024; }
+#panneau .p-fermer:hover, #tournee .p-fermer:hover { background: #fff; }
+#panneau .p-fermer { left: 390px; }
+#tournee .p-fermer { left: 410px; }
+@media (max-width: 720px) {
+  /* Au cellulaire, les panneaux montent du bas sur toute la largeur : le bouton se pose juste au-dessus, à droite. */
+  #panneau .p-fermer { left: auto; right: 10px; top: auto; bottom: calc(60vh + 8px); }
+  #tournee .p-fermer { left: auto; right: 10px; top: auto; bottom: calc(70vh + 8px); }
+}
 .p-pastilles { display: flex; gap: 6px; flex-wrap: wrap; margin: 12px 0 4px; }
 .pastille { font-size: 12px; padding: 2px 9px; border-radius: 99px; background: #e9efed; }
 .pastille.bientot { background: var(--douce); } .pastille.pressant { background: var(--ambre); color: #3a2500; }
@@ -187,7 +207,7 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: #dcecef; col
 #bouton-lumiere svg circle { fill: currentColor; }
 #bouton-lumiere:hover { background: #fff; }
 /* Panneau de dossier ouvert (à gauche) : l'horloge et le bouton se tassent à droite du panneau. */
-#panneau:not([hidden]) ~ #horloge { left: 408px; }
+#panneau:not([hidden]) ~ #horloge { left: 456px; }   /* laisse la place au bouton Fermer, à droite du panneau */
 #panneau:not([hidden]) ~ #horloge .h-heure { font-size: clamp(56px, 6.5vw, 104px); }
 #panneau:not([hidden]) ~ #bouton-lumiere { left: 396px; }
 /* La nuit (mode Auto) : la date et l'interface se font discrètes pour ne pas éblouir. */
@@ -204,3 +224,6 @@ body.ciel-nuit #bouton-lumiere { background: #1a2030d9; border-color: #39425a; c
 .t-groupe { margin-top: 18px; padding-top: 10px; border-top: 2px dashed var(--bord); }
 .t-groupe-titre { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--discret); }
 .t-groupe .t-carte { opacity: .85; }
+/* Traitement dans Claude (2026-11-26) : cartes décidées à faire traiter par Claude. */
+.t-traitement { border-top-style: solid; }
+.t-liste { margin: 6px 0 8px; padding-left: 18px; font-size: 13px; }
