@@ -101,6 +101,9 @@ html, body { margin: 0; height: 100%; overflow: hidden; background: #dcecef; col
 .t-decision { margin: 8px 0 0; font-weight: 600; font-size: 14px; }
 .t-historique { margin-top: 16px; }
 .t-combinee { margin: 0 0 6px; font-size: 12.5px; color: var(--discret); }
+.t-messages { display: flex; flex-direction: column; gap: 4px; }
+.t-message > summary { cursor: pointer; font-size: 13px; font-weight: 600; padding: 4px 2px; }
+.t-message > .t-texte { margin-top: 2px; }
 .t-avant { margin: 6px 0 0; font-size: 12.5px; color: var(--discret); font-style: italic; }
 .t-attente { margin: 10px 0 0; padding: 8px 10px; border-radius: 8px; background: #f6f1e7; color: var(--discret); font-size: 13.5px; }
 /* « Faire la tournée » : collé en bas du panneau même quand on fait défiler les cartes (2026-11-27). */
